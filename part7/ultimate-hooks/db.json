@@ -1,0 +1,41 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "content": "custom-hooks are awesome!"
+    },
+    {
+      "id": "2",
+      "content": "best feature ever <3"
+    },
+    {
+      "id": "7caa",
+      "content": "hi i am diego"
+    },
+    {
+      "id": "de2f",
+      "content": "hola que tal"
+    },
+    {
+      "id": "eb68",
+      "content": "java script"
+    }
+  ],
+  "persons": [
+    {
+      "id": "1",
+      "name": "mluukkai",
+      "number": "040-5483923"
+    },
+    {
+      "id": "2",
+      "name": "hellas",
+      "number": "012-123123"
+    },
+    {
+      "id": "fb24",
+      "name": "diego",
+      "number": "123-456789"
+    }
+  ]
+}
