@@ -8,17 +8,17 @@ export const login = createAsyncThunk(
 	async (credentials, { dispatch }) => {
 		try {
 			const user = await loginService.login(credentials);
-			dispatch(setNotification(`Welcome ${user.name}`, false));
 			blogService.setToken(user.token);
 			window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
+			dispatch(
+				setNotification({ content: `Welcome ${user.username}`, error: false })
+			);
 			return user;
-		} catch (exception) {
-			dispatch(setNotification('Wrong credentials', true));
+		} catch (error) {
+			dispatch(
+				setNotification({ content: error.response.data.error, error: true })
+			);
 		}
-
-		setTimeout(() => {
-			dispatch(setNotification(null));
-		}, 5000);
 	}
 );
 

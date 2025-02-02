@@ -1,36 +1,53 @@
 import { useEffect } from 'react';
 import LoginForm from './pages/LoginForm';
-import blogService from './services/blogs';
+import { setToken } from './services/blogs';
 import Notification from './components/Notification';
-import { useDispatch, useSelector } from 'react-redux';
-import { initializeBlogs } from './reducers/blogReducer';
-import { setUser } from './reducers/userReducer';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import AuthorBlogs from './pages/AuthorBlogs';
 import BlogList from './pages/BlogList';
 import BlogInfo from './pages/BlogInfo';
 import NavBar from './components/NavBar';
+import Container from '@mui/material/Container';
+import { useAuth } from './context/AuthContext';
+import { useBlogs } from './context/BlogsContext';
+import { useQuery } from '@tanstack/react-query';
+import { getAll } from './services/blogs';
 
 const App = () => {
-	const dispatch = useDispatch();
-	const userState = useSelector(state => state.user);
-
-	useEffect(() => {
-		dispatch(initializeBlogs());
-	}, []);
+	const { user: userState, setUser } = useAuth();
+	const { setBlogs } = useBlogs();
 
 	useEffect(() => {
 		const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
 		if (loggedUserJSON) {
 			const user = JSON.parse(loggedUserJSON);
-			dispatch(setUser(user));
-			blogService.setToken(user.token);
+			setUser(user);
+			setToken(user.token);
 		}
 	}, []);
 
+	const result = useQuery({
+		queryKey: ['blogs'],
+		queryFn: getAll,
+		retry: false,
+		refetchOnWindowFocus: false,
+	});
+
+	useEffect(() => {
+		setBlogs(result.data);
+	}, [result.data, setBlogs]);
+
+	if (result.isLoading) {
+		return <div>loading data...</div>;
+	}
+
+	if (result.isError) {
+		return <div>{result.error.message}</div>;
+	}
+
 	return (
-		<>
+		<Container maxWidth="md">
 			<div>
 				<Notification />
 				{userState && <NavBar />}
@@ -47,7 +64,7 @@ const App = () => {
 					element={userState ? <BlogInfo /> : <LoginForm />}
 				/>
 			</Routes>
-		</>
+		</Container>
 	);
 };
 

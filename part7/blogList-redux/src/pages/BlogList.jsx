@@ -15,6 +15,7 @@ const BlogList = () => {
 	};
 
 	console.log(blogsState);
+
 	return (
 		<div>
 			<Togglable buttonLabel="new blog">

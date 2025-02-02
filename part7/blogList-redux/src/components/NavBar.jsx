@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducers/userReducer';
+import LogoutIcon from '@mui/icons-material/Logout';
+import IconButton from '@mui/material/IconButton';
 
 const NavBar = () => {
 	const dispatch = useDispatch();
@@ -20,15 +22,15 @@ const NavBar = () => {
 				<Link to="/users" style={{ marginRight: 10 }}>
 					users
 				</Link>
-				<em style={{ marginRight: 10 }}>{user.name} logged in</em>
-				<button
+				<em style={{ marginRight: 10 }}>{user.username} logged in</em>
+				<IconButton
 					onClick={() => {
 						window.localStorage.removeItem('loggedBlogappUser');
 						dispatch(setUser(null));
 					}}
 				>
-					logout
-				</button>
+					<LogoutIcon />
+				</IconButton>
 			</div>
 			<h1>Blog App</h1>
 		</div>

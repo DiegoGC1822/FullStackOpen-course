@@ -28,9 +28,6 @@ export const createBlog = createAsyncThunk(
 				setNotification({ content: error.response.data.error, error: true })
 			);
 		}
-		setTimeout(() => {
-			dispatch(setNotification(null));
-		}, 5000);
 	}
 );
 
@@ -51,9 +48,6 @@ export const addLike = createAsyncThunk(
 				setNotification({ content: error.response.data.error, error: true })
 			);
 		}
-		setTimeout(() => {
-			dispatch(setNotification(null));
-		}, 5000);
 	}
 );
 
@@ -69,9 +63,6 @@ export const removeBlog = createAsyncThunk(
 				setNotification({ content: error.response.data.error, error: true })
 			);
 		}
-		setTimeout(() => {
-			dispatch(setNotification(null));
-		}, 5000);
 	}
 );
 
@@ -87,9 +78,6 @@ export const createComment = createAsyncThunk(
 				setNotification({ content: error.response.data.error, error: true })
 			);
 		}
-		setTimeout(() => {
-			dispatch(setNotification(null));
-		}, 5000);
 	}
 );
 
@@ -107,7 +95,7 @@ const blogSlice = createSlice({
 				return action.payload;
 			})
 			.addCase(createBlog.fulfilled, (state, action) => {
-				state.push(action.payload);
+				if (action.payload) state.push(action.payload);
 			})
 			.addCase(addLike.fulfilled, (state, action) => {
 				const id = action.payload.id;

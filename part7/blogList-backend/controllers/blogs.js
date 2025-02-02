@@ -58,7 +58,9 @@ blogsRouter.put("/:id", getTokenFrom, userExtractor, async (request, response) =
 			runValidators: true,
 			context: "query",
 		}
-	).populate("user", { username: 1, name: 1 });
+	)
+		.populate("user", { username: 1, name: 1 })
+		.populate("comments");
 	response.json(result);
 });
 
