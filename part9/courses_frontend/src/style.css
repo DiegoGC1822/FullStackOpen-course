@@ -1,0 +1,9 @@
+.part {
+  margin-bottom: 16px;
+}
+
+.part h3,
+.part p,
+.part i {
+  margin: 0;
+}

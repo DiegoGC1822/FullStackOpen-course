@@ -1,0 +1,31 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-node": "ts-node",
+    "calculateBmi": "ts-node bmiCalculator.ts",
+    "calculateExercises": "ts-node exerciseCalculator.ts",
+    "start": "tsx index.ts",
+    "dev": "tsx watch index.ts",
+    "lint": "eslint --ext .ts ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "eslint": "^9.22.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "globals": "^16.0.0"
+  }
+}
